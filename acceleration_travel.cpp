@@ -240,20 +240,19 @@ return;
 }
 }
 
-double calculate(v0,vf,x0,xf,y0,yf,a){
+double calculate(x0,xf,y0,yf,a){
 
 double dist = sqrt((xf-x0)*(xf-x0)+(yf-y0)*(yf-y0); \\distance between points 
 double distfab = dist/2; \\distance to flip and burn 
 double ak = a * g; \\acceleration in km/s
 double c0 = sqrt(x0*x0+y0*y0); \\distance from dest to sun
-double cf = sqrt(xf*xf+yf*yf);
-std::vector<double> vv0 = {((y0)/c0)*v0,((x0 * - 1)/c0)*v0}; \\velocity vector of starting point
-std::vector<double> vvf = {((yf)/cf)*vf,((xf * - 1)/cf)*vf}; \\velocity vector of destination
+double cf = sqrt(xf*xf+yf*yf); \\dist from final to sun
+\\ d = 0.d5 * a * t^2 . t^2 = d/(0.25 * c) 
+double time = 2 * sqrt(dist/a); \\calculate the time in seconds 
 
+return time;
 
 }
-
-
 
 
 int main(){
@@ -281,7 +280,7 @@ stv = mecruryloc(t,v); \\initial velocity
 
 }
 
-if (start == "Venus"){
+else if (start == "Venus"){
 
 stx = venusloc(t,x); \\begining x position
 sty = venusloc(t,y); \\begining y position
@@ -289,7 +288,7 @@ stv = venusloc(t,v); \\initial velocity
 
 }
 
-if (start == "Earth"){
+else if (start == "Earth"){
 
 stx = earthloc(t,x); \\begining x position
 sty = earthloc(t,y); \\begining y position
@@ -297,7 +296,7 @@ stv = earthloc(t,v); \\initial velocity
 
 }
 
-if (start == "Mars"){
+else if (start == "Mars"){
 
 stx = marsloc(t,x); \\begining x position
 sty = marsloc(t,y); \\begining y position
@@ -305,7 +304,7 @@ stv = marsloc(t,v); \\initial velocity
 
 }
 
-if (start == "Jupiter"){
+else if (start == "Jupiter"){
 
 stx = jupiterloc(t,x); \\begining x position
 sty = jupiterloc(t,y); \\begining y position
@@ -313,7 +312,7 @@ stv = jupiterloc(t,v); \\initial velocity
 
 }
 
-if (start == "Saturn"){
+else if (start == "Saturn"){
 
 stx = saturnloc(t,x); \\begining x position
 sty = saturnloc(t,y); \\begining y position
@@ -321,7 +320,7 @@ stv = saturnloc(t,v); \\initial velocity
 
 }
 
-if (start == "Uranus"){
+else if (start == "Uranus"){
 
 stx = uranusloc(t,x); \\begining x position
 sty = uranusloc(t,y); \\begining y position
@@ -329,12 +328,99 @@ stv = uranusloc(t,v); \\initial velocity
 
 }
 
-if (start == "Neptune"){
+else if (start == "Neptune"){
 
 stx = neptuneloc(t,x); \\begining x position
 sty = neptuneloc(t,y); \\begining y position
 stv = neptuneloc(t,v); \\initial velocity
 
 }
+
+else if (start == "Coordinate Input"){
+
+cout << "What are the coordinates of your object in x followed by y"; \\get user input
+cin >> double stx;
+cin >> double sty;
+double stv = 0;
+
+}
+
+
+else if (end == "Mercury"){
+
+enx = mercuryloc(t,x); \\begining x position
+eny = mercuryloc(t,y); \\begining y position
+env = mecruryloc(t,v); \\initial velocity
+
+}
+
+else if (end == "Venus"){
+
+enx = venusloc(t,x); \\begining x position
+eny = venusloc(t,y); \\begining y position
+env = venusloc(t,v); \\initial velocity
+
+}
+
+else if (end == "Earth"){
+
+enx = earthloc(t,x); \\begining x position
+eny = earthloc(t,y); \\begining y position
+env = earthloc(t,v); \\initial velocity
+
+}
+
+else if (end == "Mars"){
+
+enx = marsloc(t,x); \\begining x position
+eny = marsloc(t,y); \\begining y position
+env = marsloc(t,v); \\initial velocity
+
+}
+
+else if (end == "Jupiter"){
+
+enx = jupiterloc(t,x); \\begining x position
+eny = jupiterloc(t,y); \\begining y position
+env = jupiterloc(t,v); \\initial velocity
+
+}
+
+else if (end == "Saturn"){
+
+enx = saturnloc(t,x); \\begining x position
+eny = saturnloc(t,y); \\begining y position
+env = saturnloc(t,v); \\initial velocity
+
+}
+
+else if (end == "Uranus"){
+
+enx = uranusloc(t,x); \\begining x position
+eny = uranusloc(t,y); \\begining y position
+env = uranusloc(t,v); \\initial velocity
+
+}
+
+else if (end == "Neptune"){
+
+enx = neptuneloc(t,x); \\begining x position
+eny = neptuneloc(t,y); \\begining y position
+env = neptuneloc(t,v); \\initial velocity
+
+
+else if (end == "Coordinate Input"){
+
+cout << "What are the coordinates of your object in x followed by y"; \\get user input
+cin >> double enx;
+cin >> double eny;
+double stv = 0;
+
+}
+
+double sec = calculate(stx,enx,sty,eny,a); \\get the time in seconds for the function
+double days = sec / 86400; \\time in days for the journey
+
+std::cout << "The journey will take " << days << " to complete.\n"; \\tell the user 
 
 }
